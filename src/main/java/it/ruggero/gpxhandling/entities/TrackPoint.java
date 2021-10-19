@@ -1,15 +1,20 @@
+package it.ruggero.gpxhandling.entities;
+
+import java.time.LocalDateTime;
+
 public class TrackPoint {
     private double lat;
     private double lon;
 
     private double elevation;
+    private LocalDateTime localDateTime;
 
-    TrackPoint(double lat, double lon) {
+    public TrackPoint(double lat, double lon) {
         this.lat = Math.toRadians(lat);
         this.lon = Math.toRadians(lon);
     }
 
-    TrackPoint(double lat, double lon, double elevation) {
+    public TrackPoint(double lat, double lon, double elevation) {
         this.lat = Math.toRadians(lat);
         this.lon = Math.toRadians(lon);
         this.elevation = elevation;
@@ -25,6 +30,14 @@ public class TrackPoint {
 
     public double getElevation() {
         return this.elevation;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 
     public String toString() {

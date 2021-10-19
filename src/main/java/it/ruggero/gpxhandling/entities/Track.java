@@ -1,6 +1,11 @@
+package it.ruggero.gpxhandling.entities;
+
+import it.ruggero.gpxhandling.entities.Segment;
+import it.ruggero.gpxhandling.entities.TrackPoint;
+
 import java.util.*;
 
-class Track {
+public class Track {
     private static double N = 1;
     private List<TrackPoint> trackPointList = new ArrayList<>();
     private List<Segment> segmentList = new ArrayList<>();
@@ -48,5 +53,13 @@ class Track {
 
     public void printElevations() {
         trackPointList.forEach(x-> System.out.printf("elevation :  %3.1f%n", x.getElevation()));
+    }
+
+    public  void printDateTime() {
+        trackPointList.forEach( x-> System.out.println(x.getLocalDateTime()));
+    }
+
+    public void printSpeed( ) {
+        segmentList.forEach( x-> System.out.printf( "%2.1f [km/h] %n", 3.6*x.getSpeed() )  );
     }
 }

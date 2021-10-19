@@ -1,16 +1,29 @@
+package it.ruggero.gpxhandling.entities;
+
+import it.ruggero.gpxhandling.entities.TrackPoint;
+
+import java.time.ZoneOffset;
+
 public class Segment {
     private TrackPoint startPoint;
     private TrackPoint endPoint;
     private double distance;
+    private double speed;
 
     public Segment(TrackPoint startPoint, TrackPoint endPoint) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         calculatePointToPointDistance(startPoint, endPoint);
+
     }
 
     public double getDistance() {
         return this.distance;
+    }
+
+    public double getSpeed() {
+        calculateSpeed();
+        return speed;
     }
 
     private void calculatePointToPointDistance(TrackPoint t1, TrackPoint t2) {
@@ -25,5 +38,16 @@ public class Segment {
         dist = d2;
         //if (Double.isNaN(dist)) dist = 0;
         this.distance = dist;
+    }
+
+    private void calculateSpeed() {
+        if ( (startPoint.getLocalDateTime()!=null) && (endPoint.getLocalDateTime()!=null)) {
+            ZoneOffset zone = ZoneOffset.of("Z");
+            long duration = endPoint.getLocalDateTime().toEpochSecond(zone )-startPoint.getLocalDateTime().toEpochSecond(zone) ;
+            this.speed = this.distance/duration;
+
+
+        }
+
     }
 }
